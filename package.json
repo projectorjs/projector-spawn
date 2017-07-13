@@ -1,6 +1,6 @@
 {
   "name": "projector-spawn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Spawn processes with ease",
   "main": "index.js",
   "repository": "projectorjs/projector-spawn",
