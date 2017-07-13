@@ -12,24 +12,26 @@ function expectError() {
 
 test('success', () => {
   return spawn(fixture, ['SUCCESS']).then(res => {
-    expect(res).toMatchSnapshot();
+    expect(res.code).toEqual(0);
+    expect(res.stdout).toContain('/fixture.js","SUCCESS"');
+    expect(res.stderr).toEqual('');
   });
 });
 
 test('failure', () => {
   return spawn(fixture, ['FAILURE']).then(expectError, err => {
-    expect(err.stack).toMatchSnapshot('failure err.stack');
-    expect(err.code).toMatchSnapshot('failure err.code');
-    expect(err.stdout).toMatchSnapshot('failure err.stdout');
-    expect(err.stderr).toMatchSnapshot('failure err.stderr');
+    expect(err.code).toEqual(1);
+    expect(err.stack).toContain('Error: what have you done');
+    expect(err.stdout).toContain('/fixture.js","FAILURE"');
+    expect(err.stderr).toContain("what have you done");
   });
 });
 
 test('throw', () => {
   return spawn(fixture, ['THROW']).then(expectError, err => {
-    expect(err.stack).toMatchSnapshot('throw err.stack');
-    expect(err.code).toMatchSnapshot('throw err.code');
-    expect(err.stdout).toMatchSnapshot('throw err.stdout');
-    expect(err.stderr).toMatchSnapshot('throw err.stderr');
+    expect(err.code).toEqual(1);
+    expect(err.stack).toContain('throw new Error(\'no\');');
+    expect(err.stdout).toContain('/fixture.js","THROW"');
+    expect(err.stderr).toContain('Error: no');
   });
 });

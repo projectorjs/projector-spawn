@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-process.stdout.write('argv: ' + JSON.stringify(process.argv));
+process.stdout.write('argv: ' + JSON.stringify(process.argv.slice(1)));
 
 if (process.argv.includes('SUCCESS')) {
   process.exit(0);

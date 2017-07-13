@@ -24,8 +24,8 @@ function spawn(
   opts /*: ?child_process$spawnOpts */
 ) {
   return new Promise((resolve, reject) => {
-    let stdoutBuf = new Buffer('');
-    let stderrBuf = new Buffer('');
+    let stdoutBuf = Buffer.from('');
+    let stderrBuf = Buffer.from('');
 
     let child = crossSpawn(cmd, args, opts);
 
